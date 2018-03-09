@@ -19,7 +19,7 @@
 		"localHookTemplate": "config/Kaiser_2018_CephalalgiaLocalHookTemplate.m",
 		"name": "Kaiser_2018_Cephalalgia",
 		"pathPlacement": "append",
-		"subfolder": ["code","data"],
+		"subfolder": "code",
 		"toolboxRoot": "",
 		"type": "git",
 		"update": "",

@@ -28,7 +28,7 @@ end
 
 % Set filenames
 qualtricsDataFile = fullfile(projectDir,'data','POEM_v1.0_MELA_and_ACHE_de-identified.csv');
-outputResultExcelName=fullfile(outputDir, 'ACHE_POEM_results.xlsx');
+outputResultExcelName=fullfile(outputDir, 'MELA_POEM_results.xlsx');
 
 
 %% load and pre-process thisDataSheet, returning table "T"
@@ -40,18 +40,19 @@ diagnosisTable = poemAnalysis_classify( T );
 writetable(diagnosisTable,outputResultExcelName,'Range','A4','WriteRowNames',true)
 
 
-%% create a confusion matrix for the ACHE-M
+
+%% create a confusion matrix for the MELA subjects
 
 % load the study neurologist diagnoses
-goldStandardFile = fullfile(projectDir,'data','ACHE-M_studyID+diagnosis.csv');
-goldStandardDiagnosis = readtable(goldStandardFile);
+goldStandardFile = 'MELA-studyID+diagosis.csv';
+goldStandardFileFullPath = fullfile(dropboxDir, analysisDir, goldStandardFile);
+goldStandardDiagnosis = readtable(goldStandardFileFullPath);
 
 % This is the order of columns in the confusion matrix. Note that we are
 % not including the Migraine with other aura here.
 reOrderedPoemDiagnosisLabels = {'HeadacheFree','MildNonMigrainousHeadache','HeadacheNOS','MigraineWithoutAura','MigraineWithVisualAura','MigraineWithOtherAura'};
-outputPoemDiagnosisLabels = {'HeadacheFree','MildNonMigrainousHeadache','HeadacheNOS','MigraineWithoutAura','MigraineWithAnyAura'};
 
-confusionMatrix = zeros(3,5);
+confusionMatrix = zeros(5,5);
 % loop through the subjects in the diagnosisTable
 for ss = 1:size(diagnosisTable,1)
     % get this subject's studyID
@@ -63,12 +64,16 @@ for ss = 1:size(diagnosisTable,1)
         switch goldStandardDiagnosis.Diagnosis{matchIdx}
             case ''
                 rowIdx = [];
-            case 'Control'
+            case 'Headache free'
                 rowIdx = 1;
-            case 'Migraine without aura'
+            case 'Mild non-migrainous headache'
                 rowIdx = 2;
-            case 'Migraine with aura'
+            case 'Headache NOS'
                 rowIdx = 3;
+            case 'Migraine without aura'
+                rowIdx = 4;
+            case 'Migraine with visual aura'
+                rowIdx = 5;
             otherwise
                 error('I encountered an undefined gold standard diagnosis');
         end
@@ -94,13 +99,12 @@ for dd = 1:5
     outline = [outline '\t' outputPoemDiagnosisLabels{dd} '\t'];
 end
 fprintf([outline '\n']);
-goldStandardDiagnoses = {'Control\t\t','Migraine without aura','Migraine with aura'};
-for rr = 1:3
+goldStandardDiagnoses = {'Headache free\t\t','Mild non-migrainous headache','Headache NOS\t\t','Migraine without aura\t','Migraine with visual aura'};
+for rr = 1:5
     outline = [goldStandardDiagnoses{rr} '\t'];
     for cc = 1:5
         outline = [outline num2str(confusionMatrix(rr,cc)) '\t\t'];
     end
 fprintf([outline '\n']);
 end
-fprintf('\n\n');
 
