@@ -3,7 +3,7 @@
 		"flavor": "",
 		"hook": "",
 		"importance": "",
-		"localHookTemplate": "configuration/Kaiser_2018_CephalalgiaLocalHook",
+		"localHookTemplate": "configuration/Kaiser_2018_CephalalgiaLocalHook.m",
 		"name": "Kaiser_2018_Cephalalgia",
 		"pathPlacement": "append",
 		"subfolder": "code",
