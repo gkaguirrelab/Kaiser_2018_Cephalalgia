@@ -1,0 +1,29 @@
+[
+ 	{
+		"flavor": "",
+		"hook": "",
+		"importance": "",
+		"localHookTemplate": "",
+		"name": "POEM",
+		"pathPlacement": "append",
+		"subfolder": "",
+		"toolboxRoot": "",
+		"type": "include",
+		"update": "",
+		"url": ""
+	},
+	{
+		"flavor": "",
+		"hook": "",
+		"importance": "",
+		"localHookTemplate": "config/Kaiser_2018_CephalalgiaLocalHookTemplate.m",
+		"name": "Kaiser_2018_Cephalalgia",
+		"pathPlacement": "append",
+		"subfolder": ["code","data"],
+		"toolboxRoot": "",
+		"type": "git",
+		"update": "",
+		"url": "https://github.com/gkaguirrelab/Kaiser_2018_Cephalalgia"
+	}
+]
+
