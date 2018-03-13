@@ -45,7 +45,7 @@ writetable(diagnosisTable,outputResultExcelName,'Range','A4','WriteRowNames',tru
 
 % load the study neurologist diagnoses
 goldStandardFile = 'MELA-studyID+diagosis.csv';
-goldStandardFileFullPath = fullfile(dropboxDir, analysisDir, goldStandardFile);
+goldStandardFileFullPath = fullfile(projectDir,'data', goldStandardFile);
 goldStandardDiagnosis = readtable(goldStandardFileFullPath);
 
 % This is the order of columns in the confusion matrix. Note that we are
